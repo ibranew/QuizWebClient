@@ -1,0 +1,181 @@
+// Renkler ve Değişkenler
+$primary-color: #227083; // Ana Renk
+$secondary-color: #ffc107; // Accent Renk
+$background-color: #f5f5f5;
+$card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+$transition-speed: 0.25s;
+
+// Temel Stil
+.quiz-container {
+  background-color: $background-color;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px auto;
+  margin-top: 50px;
+  max-width: 850px;
+  box-shadow: $card-shadow;
+
+  h2 {
+    font-size: 1.4rem;
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  // Quiz Oluşturma Butonu
+  .btn-create {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto 15px;
+    background-color: $primary-color;
+    color: white;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: box-shadow $transition-speed, transform $transition-speed;
+
+    mat-icon {
+      margin-right: 6px;
+    }
+
+    &:hover {
+      box-shadow: $hover-shadow;
+      transform: scale(1.05);
+    }
+  }
+
+  // Arama Çubuğu
+  .search-bar {
+    width: 100%;
+    margin-bottom: 15px;
+
+    mat-form-field {
+      width: 100%;
+
+      input {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      mat-icon {
+        color: $primary-color;
+      }
+    }
+  }
+
+  // Quiz Listesi
+  .quiz-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: $card-shadow;
+    transition: box-shadow $transition-speed, transform $transition-speed;
+
+    &:hover {
+      box-shadow: $hover-shadow;
+      transform: translateY(-3px);
+    }
+
+    .quiz-info {
+      h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: $primary-color;
+      }
+
+      p {
+        margin: 4px 0 0;
+        color: #555;
+        font-size: 0.85rem;
+      }
+    }
+
+    // Düzenleme Butonu
+    .btn-edit {
+      background-color: $secondary-color;
+      color: black;
+      font-size: 0.85rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: box-shadow $transition-speed, transform $transition-speed;
+
+      mat-icon {
+        margin-right: 4px;
+      }
+
+      &:hover {
+        box-shadow: $hover-shadow;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Pagination Stil
+  mat-paginator {
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: $card-shadow;
+
+    .mat-paginator-container {
+      justify-content: center;
+    }
+  }
+}
+.list-buttons {
+  display: flex; /* Flexbox ile düzenlemeyi aktif hale getirir */
+  align-items: center; /* Yüksekliklerini ortalamak için */
+  gap: 10px; /* Butonlar arasında boşluk bırakır (isteğe bağlı) */
+}
+
+// Responsive Tasarım
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 10px;
+
+    .quiz-item {
+      flex-direction: column;
+      text-align: center;
+
+      .quiz-info {
+        margin-bottom: 8px;
+      }
+
+      .btn-edit {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-container {
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    .btn-create {
+      font-size: 0.85rem;
+      padding: 5px 10px;
+    }
+
+    .quiz-item .quiz-info {
+      h3 {
+        font-size: 0.9rem;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

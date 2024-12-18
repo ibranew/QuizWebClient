@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing Google font - Open Sans */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+
+:root {
+  --bg: #227083; /* Ana arka plan rengi */
+  --text: #ffffff; /* Ana yazı rengi */
+  
+  /* Birincil Butonlar */
+  --btn-bg: #1a5e75; /* Birincil buton rengi */
+  --btn-bg-hover: #227083; /* Hover için daha parlak */
+  
+  /* İkincil Butonlar */
+  --btn-bg-2: #ffc107; /* Sarı buton rengi */
+  --btn-bg-hover-2: #ffca2a; /* Sarı hover rengi */
+
+  /* Üçüncül Butonlar */
+  --btn-bg-3: #f4511e; /* Turuncu buton rengi */
+  --btn-bg-hover-3: #ff6d3d; /* Turuncu hover rengi */
+
+  /* Arka Planlar */
+  --bg-sec: #a0cdeb; /* İkinci arka plan rengi */
+  --bg-the: #f9fafc; /* Konteyner arka planı için nötr renk */
+  --quiz-item-bg: #ffffff; /* Quiz item arka planı */
+
+  /* Yazılar */
+  --text-primary: #1a2e35; /* Ana metin rengi */
+  --text-secondary: #4a6c77; /* İkincil metin rengi */
+  --text-link: #227083; /* Link rengi */
+  --text-link-hover: #1e4860; /* Link hover rengi */
+
+  /* Giriş Alanları */
+  --input-border: #1e5b7c; /* Input alanının kenarlığı */
+  --input-focus-border: #227083; /* Input focus kenarlığı */
+
+  /* Kutular ve Gölgelendirme */
+  --box-shadow-light: rgba(34, 112, 131, 0.15); /* Hafif gölge */
+  --box-shadow-hover: rgba(34, 112, 131, 0.3); /* Hover gölgesi */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+body {
+    width: 100%;
+    background-color:  var(--bg);
+    //background: url("/back.jpg") center/cover no-repeat;
+}
+
+

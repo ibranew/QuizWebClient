@@ -1,0 +1,49 @@
+<div class="register-container">
+  <h2>Kaydol</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <div class="input-item">
+        <label for="first-name">Ad</label>
+        <input type="text" id="first-name" formControlName="name" placeholder="Adınız" required />
+      </div>
+      <div class="input-item">
+        <label for="last-name">Soyad</label>
+        <input type="text" id="last-name" formControlName="surName" placeholder="Soyadınız" required />
+      </div>
+    </div>
+
+    <div class="input-group">
+      <div class="input-item">
+        <label for="username">Kullanıcı adı</label>
+        <input type="text" id="username" formControlName="userName" placeholder="Kullanıcı adı giriniz" required />
+      </div>
+      <div class="input-item">
+        <label for="email">E-Posta</label>
+        <input type="email" id="email" formControlName="email" placeholder="E-Posta giriniz" required />
+      </div>
+    </div>
+
+    <div class="input-group">
+      <div class="input-item">
+        <label for="password">Şifre</label>
+        <input type="password" id="password" formControlName="password" placeholder="Şifre oluştur" required />
+      </div>
+      <div class="input-item">
+        <label for="confirm-password">Şifre onayla</label>
+        <input
+          type="password"
+          id="confirm-password"
+          formControlName="confirmPassword"
+          placeholder="Şifreyi tekrar giriniz"
+          required
+        />
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Kaydol</button>
+  </form>
+
+  <div class="login-redirect">
+    <p>Hesabınız var mı? <a routerLink="/login">Giriş yap</a></p>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="login-container">
+    <h2>Giriş Yap</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="input-group">
+        <div class="input-item">
+          <label for="username">Kullanıcı Adı</label>
+          <input type="text" id="username" formControlName="username" placeholder="Kullanıcı adı giriniz" required />
+        </div>
+      </div>
+  
+      <div class="input-group">
+        <div class="input-item">
+          <label for="password">Şifre</label>
+          <input type="password" id="password" formControlName="password" placeholder="Şifre giriniz" required />
+        </div>
+      </div>
+  
+      <button type="submit">Giriş Yap</button>
+    </form>
+  
+    <div class="signup-redirect">
+      <p>Hesabınız yok mu? <a routerLink="/register">Kaydol</a></p>
+    </div>
+</div>

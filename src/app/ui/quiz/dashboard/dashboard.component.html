@@ -1,0 +1,43 @@
+<!-- Daha önce oluşturulmuş quiz listesi -->
+<div class="quiz-container">
+  <h2>Mevcut Quizler</h2>
+
+   <!-- Quiz oluşturma butonu -->
+<button mat-raised-button color="primary" class="btn-create" (click)="createQuiz()">
+  <mat-icon>add</mat-icon>
+  Yeni Quiz Oluştur
+</button>
+
+  <!-- Search Bar -->
+  <mat-form-field class="search-bar" appearance="outline">
+    <mat-label>Quiz Ara</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (ngModelChange)="onSearch($event)" placeholder="Quiz başlığı girin..."/>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <!-- Quiz List -->
+  <div *ngFor="let quiz of filteredQuizzes.slice(startIndex, endIndex)" class="quiz-item">
+    <div class="quiz-info">
+      <h3>{{ quiz.title }}</h3>
+      <p>{{ quiz.description }}</p>
+    </div>
+    <div class="list-buttons">
+      <div appDelete 
+          [id]="quiz.id" 
+          controllerName="quizzes"></div>
+      <button mat-flat-button color="accent" class="btn-edit" (click)="editQuiz(quiz.id)">
+        <mat-icon>edit</mat-icon>
+        Düzenle
+      </button>
+    </div>
+    
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [length]="totalQuizzesCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[3, 5]"
+    (page)="handlePageEvent($event)">
+  </mat-paginator>
+</div>

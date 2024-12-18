@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Quiz Oluştur</h2>
+<mat-dialog-content>
+  <div class="container">
+    <form [formGroup]="form">
+      <div class="input-group">
+        <div class="input-item">
+          <label for="quizName">Quiz Adı</label>
+          <input type="text" id="quizName" formControlName="title" placeholder="Quiz adını giriniz" required />
+        </div>
+      </div>
+  
+      <div class="input-group">
+        <div class="input-item">
+          <label for="quizDescription">Quiz Açıklaması</label>
+          <textarea id="quizDescription" formControlName="description" placeholder="Quiz açıklamasını giriniz" required></textarea>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="button" mat-dialog-close>Kapat</button>
+  <button class="button-create" (click)="createQuiz()">Oluştur</button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+<header>
+    <nav class="navbar">
+      <span class="hamburger-btn material-symbols-rounded">menu</span>
+      <a routerLink="" class="logo">
+        <h2>Quiz K</h2>
+      </a>
+      <ul class="links">
+        <span class="close-btn material-symbols-rounded">close</span>
+        <li><a routerLink="">Ana sayfa</a></li>
+        <li><a routerLink="quiz">Quiz Oluştur</a></li>
+      </ul>
+      <!-- Kullanıcı oturum durumu reaktif olarak kontrol ediliyor -->
+      <div *ngIf="authService.isLoggedIn$ | async">
+        <a (click)="logout()" class="logout-btn">Çıkış yap</a>
+      </div>
+      <div *ngIf="!(authService.isLoggedIn$ | async)">
+        <a routerLink="/login" class="login-btn">Giriş</a>
+      </div>      
+    </nav>
+</header>
+  
