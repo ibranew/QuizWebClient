@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Dikkat</h2>
+<mat-dialog-content>
+  <p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Hayır</button>
+  <button 
+   mat-button  
+   (click)="confirm()">Evet</button>
+</mat-dialog-actions>

@@ -24,10 +24,15 @@
     <div class="list-buttons">
       <div appDelete 
           [id]="quiz.id" 
-          controllerName="quizzes"></div>
-      <button mat-flat-button color="accent" class="btn-edit" (click)="editQuiz(quiz.id)">
+          controllerName="Quizzes"
+          (callback)="fetchQuizzes()"></div>
+       <button mat-flat-button color="accent" class="btn-edit" (click)="editQuiz(quiz.id)">
         <mat-icon>edit</mat-icon>
         Düzenle
+      </button>
+      <button mat-flat-button color="accent" class="btn-edit" (click)="addQuestion(quiz.id)">
+        <mat-icon>edit</mat-icon>
+        Soru Ekle
       </button>
     </div>
     
@@ -37,7 +42,7 @@
   <mat-paginator
     [length]="totalQuizzesCount"
     [pageSize]="pageSize"
-    [pageSizeOptions]="[3, 5]"
+    [pageSizeOptions]="[3]"
     (page)="handlePageEvent($event)">
   </mat-paginator>
 </div>

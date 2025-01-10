@@ -1,0 +1,140 @@
+@use "@angular/material" as mat;
+
+.add-question-container {
+  max-width: 600px;
+ 
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-weight: 600;
+        color: #424242;
+        font-size: 14px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        font-size: 16px;
+        color: #333;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: #6200ea;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(98, 0, 234, 0.2);
+        }
+      }
+
+      mat-radio-button {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .mat-radio-label-content {
+          font-size: 14px;
+          color: #424242;
+        }
+      }
+    }
+
+    .answer-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background-color: #f9f9f9;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      position: relative;
+
+      .remove-btn {
+        position: absolute;
+        top: 8px;
+        right: 18px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #d32f2f;
+        font-size: 28px;
+        font-weight: bold;
+
+        &:hover {
+          color: #b71c1c;
+        }
+      }
+    }
+
+    .add-answer-button {
+      align-self: flex-start;
+      padding: 10px 16px;
+      font-size: 14px;
+      color: #ffffff;
+      background-color: #6200ea;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #3700b3;
+      }
+    }
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  gap: 10px;
+
+  button {
+    padding: 10px 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+
+    &[mat-dialog-close] {
+      background-color: #e0e0e0;
+      color: #424242;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #c0c0c0;
+      }
+    }
+
+    &[color="accent"] {
+      background-color: #03dac5;
+      color: #ffffff;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #018786;
+      }
+    }
+  }
+}
+
+h2[mat-dialog-title] {
+  margin: 0 0 20px;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 16px;
+}

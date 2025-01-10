@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Düzenle</h2>
+<mat-dialog-content>
+ <!-- edit-quiz.component.html -->
+<div class="edit-quiz-container">
+  
+    <!-- Title Input -->
+    <div>
+      <label for="title">Quiz Title:</label>
+      <input
+        id="title"
+        type="text"
+        [(ngModel)]="quiz.title"
+        placeholder="Enter quiz title"
+      />
+    </div>
+  
+    <!-- Description Input -->
+    <div>
+      <label for="description">Quiz Description:</label>
+      <textarea
+        id="description"
+        [(ngModel)]="quiz.description"
+        placeholder="Enter quiz description"
+      ></textarea>
+    </div>
+  
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>iptal</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="saveQuiz()">Kaydet</button>
+</mat-dialog-actions>

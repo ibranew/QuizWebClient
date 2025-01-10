@@ -1,38 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
 
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import {ChangeDetectionStrategy} from '@angular/core';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
 import { CreateQuizDialogComponent } from '../dialogs/create-quiz-dialog/create-quiz-dialog.component';
 import { BaseComponent } from '../../../common/base-component';
 import { BaseResponse } from '../../../models/base/base-response';
 import { FormsModule } from '@angular/forms';
 import { DeleteDirective } from '../../../directives/delete.directive';
-
-
-interface Quiz {
-  id:string;
-  title: string;
-  description: string;
-}
-
-interface QuizRequest {
-  page: number;
-  size: number;
-  query?: string; // Optional olarak işaretlendi
-}
+import { DialogService } from '../../../services/dialog.service';
+import { EditQuizDialogComponent } from '../dialogs/edit-quiz-dialog/edit-quiz-dialog.component';
+import { Quiz } from '../../../models/quiz/quiz';
+import { AddQuestionDialogComponent } from '../dialogs/add-question-dialog/add-question-dialog.component';
 
 interface QuizResponse extends BaseResponse {
   totalCount: number;
@@ -58,7 +43,7 @@ interface QuizResponse extends BaseResponse {
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
-  readonly dialog = inject(MatDialog);
+  dialogService : DialogService = inject(DialogService);
 
   filteredQuizzes: Quiz[] = [];
   pageSize: number = 3;
@@ -72,12 +57,37 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   async ngOnInit() {
     await this.fetchQuizzes();
   }
-  editQuiz(quizId: string) {
-    console.log('Düzenlenecek Quiz ID:', quizId);
+
+  addQuestion(quizId: string){
+
+    const quiz : Quiz = this.filteredQuizzes.find(quiz => quiz.id === quizId) as Quiz;
+    this.dialogService.openDialog({
+      componentType : AddQuestionDialogComponent,
+      afterClosed : ()=>this.fetchQuizzes(),
+      data : {dialogData : quiz},
+      options : {
+        width : "600px"
+      }
+    })
+
   }
 
+  //open EditQuizDialogComponent
+  editQuiz(quizId: string) {
+    const quiz : Quiz = this.filteredQuizzes.find(quiz => quiz.id === quizId) as Quiz;
+    this.dialogService.openDialog({
+      componentType : EditQuizDialogComponent,
+      afterClosed : ()=>this.fetchQuizzes(),
+      data : {dialogData : quiz}
+    })
+  }
+
+  //open CreateQuizDialog
   createQuiz() {
-    this.dialog.open(CreateQuizDialogComponent);
+    this.dialogService.openDialog({
+      componentType : CreateQuizDialogComponent,
+      afterClosed : ()=>this.fetchQuizzes()
+    })
   }
 
 

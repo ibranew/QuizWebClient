@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, inject, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BaseComponent } from '../../../../common/base-component';
 import { firstValueFrom } from 'rxjs';
 import { BaseResponse } from '../../../../models/base/base-response';
+import { BaseDialog } from '../../../../common/dialogs/base-dialog';
 
 @Component({
   selector: 'app-create-quiz-dialog',
@@ -29,15 +30,14 @@ import { BaseResponse } from '../../../../models/base/base-response';
   styleUrl: './create-quiz-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateQuizDialogComponent extends BaseComponent {
-    form: FormGroup;
-    fb: FormBuilder = inject(FormBuilder);
+export class CreateQuizDialogComponent extends BaseDialog<CreateQuizDialogComponent> implements OnInit {
+    
+  form : FormGroup | any;
+  fb: FormBuilder = inject(FormBuilder);
 
-  constructor(
-    private dialogRef: MatDialogRef<CreateQuizDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    super();
+  @Output() callback: EventEmitter<any> = new EventEmitter();// after
+
+  ngOnInit(): void {
     this.form = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]]
@@ -73,5 +73,5 @@ export class CreateQuizDialogComponent extends BaseComponent {
     this.dialogRef.close();
 
   }
-
+  
 }

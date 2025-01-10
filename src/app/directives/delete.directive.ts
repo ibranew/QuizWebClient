@@ -2,6 +2,11 @@ import { Directive, ElementRef, EventEmitter, HostListener, inject, Input, OnIni
 import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from '../services/http.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DialogService } from '../services/dialog.service';
+import { BasicDialogComponent } from '../common/dialogs/basic-dialog/basic-dialog.component';
+import { firstValueFrom } from 'rxjs';
+import { BaseResponse } from '../models/base/base-response';
+import { CustomToastrService } from '../services/custom-toastr.service';
 
 
 interface StandaloneDirective extends Directive {
@@ -18,11 +23,13 @@ export class DeleteDirective implements OnInit {
   private iconUrl : string = "/SVG/delete.svg";
 
   httpService : HttpService = inject(HttpService);
-  spinner : NgxSpinnerService = inject(NgxSpinnerService)
-
+  spinner : NgxSpinnerService = inject(NgxSpinnerService);
+  toastr : CustomToastrService = inject(CustomToastrService);
+  dialogService : DialogService = inject(DialogService);
 
 
   @Input() id: string = "";
+  @Input() message: string = "";
   @Input() controllerName: string ="";
   @Output() callback: EventEmitter<any> = new EventEmitter();// after
 
@@ -43,7 +50,42 @@ export class DeleteDirective implements OnInit {
 
   @HostListener('click')
   onClick() {
-    console.log(`Delete action for ID: ${this.id} on controller: ${this.controllerName}`);
+  
+    if (!this.message || this.message.trim() === "") {
+      this.message = "Bu işlemi onaylıyor musunuz.";
+    }
+    this.dialogService.openDialog({
+      componentType : BasicDialogComponent,
+      data : {message : this.message, confirm : false},
+      afterClosedConfirm : async ()=>{
+        //silme işlemi eğer onaylanırsa
+        const obsData  = await this.httpService.delete({
+          controller : this.controllerName
+        },this.id);
+
+        let response : BaseResponse = {responseMessage : "Hata" , succeed : false};
+        this.spinner.show();
+        try {
+          response  =  await firstValueFrom(obsData) as BaseResponse
+        } catch (error) {
+          console.log(error);
+        }
+        finally{
+          this.spinner.hide();
+        }
+        if(response.succeed){
+          this.callback.emit();
+          this.toastr.showSuccess("Silme işlemi başarılı");
+        }else{
+          this.toastr.showError("Bir hata ile karşılaşıldı");
+        }        
+        debugger;
+        
+      },
+      options : {
+        width : "350px",
+      }
+    });
   }
 
 }
